@@ -1,35 +1,26 @@
-// This is the configuration class for WebSocket
-// connections. It enables WebSocket and registers the
-// SocketConnectionHandler class as the handler for the
-// "/hello" endpoint. It also sets the allowed origins to
-// "*" so that other domains can also access the socket.
-
 package dev.phong.webChat.config;
 
-import dev.phong.webChat.handler.SocketConnectionHandler;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
-// web socket connections is handled
-// by this class
 @Configuration
-@EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer {
+@EnableWebSocketMessageBroker
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    // Overriding a method which register the socket
-    // handlers into a Registry
     @Override
-    public void registerWebSocketHandlers(
-            WebSocketHandlerRegistry webSocketHandlerRegistry)
-    {
-        // For adding a Handler we give the Handler class we
-        // created before with End point Also we are managing
-        // the CORS policy for the handlers so that other
-        // domains can also access the socket
-        webSocketHandlerRegistry
-                .addHandler(new SocketConnectionHandler(),"/hello")
-                .setAllowedOrigins("*");
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/webChat").withSockJS();
     }
+
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        registry.setApplicationDestinationPrefixes("/app");
+        registry.enableStompBrokerRelay("/topic").setRelayHost("localhost").setRelayPort(61613).setClientLogin("guest")
+                .setClientPasscode("guest");
+
+    }
+
 }
