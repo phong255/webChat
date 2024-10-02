@@ -30,7 +30,7 @@ public class WebSocketChatEventListener {
         String username = (String) headerAccessor.getSessionAttributes().get("username");
         if(username != null) {
             ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setType("Leave");
+            chatMessage.setType(ChatMessage.MessageType.LEAVE);
             chatMessage.setSender(username);
             messagingTemplate.convertAndSend("/topic/public", chatMessage);
             logger.info("Send {}",chatMessage);
