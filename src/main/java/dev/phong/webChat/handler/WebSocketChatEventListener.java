@@ -20,7 +20,7 @@ public class WebSocketChatEventListener {
 
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
-        logger.info("Received a new connection");
+        logger.info("Received a new joining");
     }
 
     @EventListener
