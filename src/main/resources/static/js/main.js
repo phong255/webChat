@@ -31,13 +31,13 @@ function connect(event) {
     event.preventDefault();
 }
 
-
+var roomId = 'a';
 function onConnected() {
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/eSoft/r1', onMessageReceived);
+    stompClient.subscribe('/topic/' + roomId, onMessageReceived);
 
     // Tell your username to the server
-    stompClient.send("/app/eSoft/r1/chat.addUser",
+    stompClient.send('/app/eSoft/chat.addUser/' + roomId,
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
     )
@@ -60,7 +60,7 @@ function sendMessage(event) {
             content: messageInput.value,
             type: 'CHAT'
         };
-        stompClient.send("/app/eSoft/r1/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        stompClient.send("/app/eSoft/chat.sendMessage/" + roomId, {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();

@@ -33,11 +33,12 @@ function connect(event) {
 
 
 function onConnected() {
+//    var roomId = 'a';
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/office/r1', onMessageReceived);
+    stompClient.subscribe('/topic/office/a', onMessageReceived);
 
     // Tell your username to the server
-    stompClient.send("/app/office/r1/chat.addUser",
+    stompClient.send("/app/office/a/chat.addUser",
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
     )
@@ -60,7 +61,7 @@ function sendMessage(event) {
             content: messageInput.value,
             type: 'CHAT'
         };
-        stompClient.send("/app/office/r1/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        stompClient.send("/app/office/a/chat.sendMessage", {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();
