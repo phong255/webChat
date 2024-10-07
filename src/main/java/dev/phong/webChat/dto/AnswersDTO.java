@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,6 +17,7 @@ import lombok.Setter;
 public class AnswersDTO {
     private Long id;
 
+    @NotNull(message = "Content not null")
     private String content;
 
     private String link;

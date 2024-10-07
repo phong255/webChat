@@ -1,5 +1,6 @@
 package dev.phong.webChat.entity;
 
+import dev.phong.webChat.common.QuestionsCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Questions {
     private Long id;
     private String content;
     private String image;
+    private QuestionsCategory category;
     @OneToMany(mappedBy = "questions", fetch = FetchType.EAGER)
     private List<Answers> answers;
 }
