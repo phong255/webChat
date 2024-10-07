@@ -1,4 +1,4 @@
-package dev.phong.webChat.entity;
+package dev.phong.webChat.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

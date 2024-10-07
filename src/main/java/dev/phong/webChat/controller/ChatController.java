@@ -1,6 +1,6 @@
 package dev.phong.webChat.controller;
 
-import dev.phong.webChat.entity.ChatMessage;
+import dev.phong.webChat.common.ChatMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
