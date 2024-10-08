@@ -14,8 +14,14 @@ services:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
       RABBITMQ_NODENAME: rabbit@localhost
+    command: [
+      "bash", "-c",
+      "chmod 400 /var/lib/rabbitmq/.erlang.cookie; 
+      rabbitmq-plugins enable rabbitmq_management;
+      rabbitmq-plugins enable rabbitmq_stomp;
+      rabbitmq-server" ]
     volumes:
-      - pgdata:/var/lib/rabbitmq
+      - rabbitmq_data:/var/lib/rabbitmq
 
   postgres:
     image: postgres:latest
@@ -26,7 +32,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
 
   app:
     build: .
@@ -41,4 +47,5 @@ services:
       SPRING_JPA_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
 
 volumes:
-  pgdata:
+  rabbitmq_data:
+  pg_data:

@@ -18,7 +18,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableStompBrokerRelay("/topic")
-                .setRelayHost("")
+                .setRelayHost("192.168.1.40")
                 .setRelayPort(61613)
                 .setClientLogin("guest")
                 .setClientPasscode("guest");
