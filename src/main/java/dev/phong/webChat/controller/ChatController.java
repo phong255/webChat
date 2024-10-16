@@ -20,7 +20,7 @@ public class ChatController {
             @Payload ChatMessage chatMessage,
             @DestinationVariable(value = "roomId") String roomId
     ){
-        logger.info(String.format("Room %s - %s: %s",roomId,chatMessage.getSender(),chatMessage.getContent()));
+        logger.info("Room {} - {}: {}", roomId, chatMessage.getSender(), chatMessage.getContent());
         return chatMessage;
     }
 
@@ -31,8 +31,14 @@ public class ChatController {
             @DestinationVariable(value = "roomId") String roomId,
             SimpMessageHeaderAccessor headerAccessor
     ){
-        logger.info(chatMessage.getSender() + " joining room " + roomId);
+        logger.info("{} joining room {}", chatMessage.getSender(), roomId);
         headerAccessor.getSessionAttributes().put("username",chatMessage.getSender());
         return chatMessage;
+    }
+
+    @MessageMapping("eSoft/typing/{roomId}")
+    @SendTo("/topic/typing/{roomId}")
+    public String typingEvent(@Payload ChatMessage chatMessage) {
+        return "User " + (chatMessage == null ? "" : chatMessage.getSender()) + " is typing...";
     }
 }

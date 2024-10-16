@@ -1,17 +1,15 @@
 package dev.phong.webChat.dto;
 
 import dev.phong.webChat.common.QuestionsCategory;
-import dev.phong.webChat.entity.Answers;
 import dev.phong.webChat.entity.Questions;
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -19,10 +17,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class QuestionsDTO {
     private Long id;
-    @NotNull(message = "Content not null")
+    @NotBlank
+    @NotNull
     private String content;
     private String image;
-    @NotNull(message = "Category not null")
+    @NotNull
     private QuestionsCategory category;
     private List<AnswersDTO> answersDTOS;
 

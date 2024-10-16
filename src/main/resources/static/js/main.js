@@ -24,6 +24,7 @@ function connect(event) {
         chatPage.classList.remove('hidden');
 
         var socket = new SockJS('/webChat');
+        console.log(socket);
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, onConnected, onError);

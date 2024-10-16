@@ -4,11 +4,13 @@ import dev.phong.webChat.common.PageDto;
 import dev.phong.webChat.common.QuestionsCategory;
 import dev.phong.webChat.dto.QuestionsDTO;
 import dev.phong.webChat.service.QuestionsService;
+import dev.phong.webChat.util.ValidUtils;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -46,16 +48,20 @@ public class QuestionController {
 
     @PostMapping
     public QuestionsDTO create(
-            @RequestBody @NotNull @Valid QuestionsDTO questionsDTO
+            @Valid @RequestBody @NotNull QuestionsDTO questionsDTO,
+            BindingResult bindingResult
     ){
+        ValidUtils.throwErrors(bindingResult);
         return questionsService.create(questionsDTO);
     }
 
     @PutMapping("/{id}")
     public QuestionsDTO update(
             @PathVariable(value = "id") Long id,
-            @RequestBody @NotNull @Valid QuestionsDTO questionsDTO
+            @RequestBody @NotNull @Valid QuestionsDTO questionsDTO,
+            BindingResult bindingResult
     ){
+        ValidUtils.throwErrors(bindingResult);
         return questionsService.update(id, questionsDTO);
     }
 
