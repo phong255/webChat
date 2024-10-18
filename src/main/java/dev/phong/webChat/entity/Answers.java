@@ -26,4 +26,11 @@ public class Answers {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "questionsId", referencedColumnName = "id")
     private Questions questions;
+
+    public Answers(String content, String link, String image, Questions questionsNew) {
+        this.content = content;
+        this.link = link;
+        this.image = image;
+        this.questions = questionsNew;
+    }
 }

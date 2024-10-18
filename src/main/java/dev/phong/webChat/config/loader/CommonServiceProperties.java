@@ -9,5 +9,6 @@ import org.springframework.context.annotation.Configuration;
 public class CommonServiceProperties {
     @Value("${app.config.folder}")
     private String folder;
-    private String api;
+    @Value("${app.bot.name}")
+    private String nameOfBot;
 }

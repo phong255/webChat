@@ -24,4 +24,10 @@ public class Questions {
     private QuestionsCategory category;
     @OneToMany(mappedBy = "questions", fetch = FetchType.EAGER)
     private List<Answers> answers;
+
+    public Questions(String content, String image, QuestionsCategory questionsCategory) {
+        this.content = content;
+        this.image = image;
+        this.category = questionsCategory;
+    }
 }

@@ -38,7 +38,7 @@ function onConnected() {
     stompClient.subscribe('/topic/' + roomId, onMessageReceived);
 
     // Tell your username to the server
-    stompClient.send('/app/eSoft/chat.addUser/' + roomId,
+    stompClient.send('/app/eSoft/chat.newUser/' + roomId,
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
     )
